@@ -124,4 +124,33 @@
 # if sorted(duma1) == sorted(duma2):
 #     print("Анаграми")
 # else:
+
 #     print("Не са анаграми")
+
+class Account:
+    def __init__(self, amount, pin, account_number, balance):
+        self.amount = amount
+        self.pin = pin
+        self.account_number = account_number
+        self.balance = balance
+        
+    def deposit(self, amount):
+        deposit = int(input("Депозит:"))
+        balance += deposit
+
+    def withdraw(self, amount, pin):
+        withdraw = int(input("Сума за теглене:"))
+        entered_pin = input("ПИН код")
+        if entered_pin == pin:
+            balance-=withdraw
+            
+    def get_account_info(self):
+        print("Номер на сметката:", account_number)
+        print("Баланс:", balance)
+        
+account_number = input("Номер на сметката:")
+balance = int(input("Начален баланс:"))
+pin = int(input("ПИН код:"))
+print("="*18)
+print("МЕНЮ")
+print("="*18)
