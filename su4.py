@@ -127,30 +127,63 @@
 
 #     print("Не са анаграми")
 
+#class
+#1
 class Account:
-    def __init__(self, amount, pin, account_number, balance):
-        self.amount = amount
+    def __init__(self, pin, account_number, balance):
         self.pin = pin
         self.account_number = account_number
         self.balance = balance
         
     def deposit(self, amount):
-        deposit = int(input("Депозит:"))
-        balance += deposit
+        self.balance+=amount
 
     def withdraw(self, amount, pin):
-        withdraw = int(input("Сума за теглене:"))
-        entered_pin = input("ПИН код")
-        if entered_pin == pin:
-            balance-=withdraw
-            
+        if pin != self.pin:
+            print("Грешен ПИН код")
+            return       
+        if amount > self.balance:
+            print("Балансът не може да стане отрицателен.")
+            return     
+        self.balance-=amount
+                           
     def get_account_info(self):
-        print("Номер на сметката:", account_number)
-        print("Баланс:", balance)
+        print("Номер на сметката:", self.account_number)
+        print("Баланс:", self.balance)
         
 account_number = input("Номер на сметката:")
-balance = int(input("Начален баланс:"))
-pin = int(input("ПИН код:"))
-print("="*18)
-print("МЕНЮ")
-print("="*18)
+
+while True:
+    try:
+        balance = int(input("Начален баланс:"))
+        break
+    except ValueError:
+        print("Балансът трябва да е с цифри.")
+
+while True:
+    try:
+        pin = int(input("ПИН код:"))
+        break
+    except:
+        print("ПИН кодът трябва да е с цифри.")
+
+bank_acc1 = Account(pin, account_number, balance)
+
+while True:
+    print("="*18)
+    print("МЕНЮ")
+    print("="*18)
+    print("1. Депозит\n2. Теглене\n3. Инфо за сметката")
+    print("="*18)
+
+    nomer = int(input("Въведете номер на операция:"))
+    match nomer:
+        case 1:
+            amount = int(input("Депозит:"))
+            bank_acc1.deposit(amount)
+        case 2:
+            amount = int(input("Сума за теглене:"))
+            entered_pin = int(input("ПИН код:"))
+            bank_acc1.withdraw(amount, entered_pin)
+        case 3:
+            bank_acc1.get_account_info()
